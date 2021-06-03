@@ -1,6 +1,7 @@
 require('dotenv').config()
 const emoji = require('node-emoji')
 const T = require('twitter')
+const schedule = require('node-schedule')
 
 const getWeeklyTopArtists = require.main.require('./getWeeklyTopArtists.js')
 const getTags = require.main.require('./getTags.js')
@@ -38,4 +39,13 @@ const main = async() => {
     })
 }
 
-main()
+const rule = new schedule.RecurrenceRule()
+    
+rule.dayOfWeek = 0
+rule.hour = 12
+rule.minute = 0
+rule.tz = 'America/Bahia'
+
+schedule.scheduleJob(rule, () => {
+    main()
+})
