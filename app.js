@@ -1,7 +1,6 @@
 require('dotenv').config()
 const emoji = require('node-emoji')
 const T = require('twitter')
-const schedule = require('node-schedule')
 
 const getWeeklyTopArtists = require.main.require('./getWeeklyTopArtists.js')
 const getTags = require.main.require('./getTags.js')
@@ -30,20 +29,11 @@ const formattedPost = async() => {
 }
 
 const main = async() => {
-    const rule = new schedule.RecurrenceRule()
-
-    rule.dayOfWeek = 0
-    rule.hour = 12
-    rule.minute = 0
-    rule.tz = 'America/Bahia'
-
-    const job = schedule.scheduleJob(rule, () => {
-        formattedPost().then(data => {
-            twitter.post(process.env.TWITTER_API_ROOT, {status: data}, (error, tweet, response) => {
-                if (error) throw error;
-                console.log(tweet);
-                console.log('tweet created at: ', response.created_at);
-            })
+    formattedPost().then(data => {
+        twitter.post(process.env.TWITTER_API_ROOT, {status: data}, (error, tweet, response) => {
+            if (error) throw error;
+            console.log(tweet);
+            console.log('tweet created at: ', response.created_at);
         })
     })
 }
