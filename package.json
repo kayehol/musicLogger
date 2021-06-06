@@ -14,5 +14,8 @@
     "node-emoji": "^1.10.0",
     "node-schedule": "^2.0.0",
     "twitter": "^1.7.1"
+  },
+  "engines": {
+    "node" : "12.x"
   }
 }

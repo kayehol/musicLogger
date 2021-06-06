@@ -49,3 +49,5 @@ rule.tz = 'America/Bahia'
 schedule.scheduleJob(rule, () => {
     main()
 })
+
+// main()
