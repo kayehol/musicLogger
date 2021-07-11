@@ -39,7 +39,7 @@ const main = async() => {
     })
 }
 
-const rule = new schedule.RecurrenceRule()
+/*const rule = new schedule.RecurrenceRule()
     
 rule.dayOfWeek = 0
 rule.hour = 12
@@ -48,6 +48,6 @@ rule.tz = 'America/Bahia'
 
 schedule.scheduleJob(rule, () => {
     main()
-})
+})*/
 
-// main()
+main()
