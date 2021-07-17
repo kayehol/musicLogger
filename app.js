@@ -1,7 +1,9 @@
 require('dotenv').config()
 const emoji = require('node-emoji')
 const T = require('twitter')
-const schedule = require('node-schedule')
+//const schedule = require('node-schedule')
+const express = require('express')
+const app = express()
 
 const getWeeklyTopArtists = require.main.require('./getWeeklyTopArtists.js')
 const getTags = require.main.require('./getTags.js')
@@ -21,10 +23,16 @@ const formattedPost = async() => {
         return artist['@attr'].rank + '.' + artist.name
     })
 
+    const artistsPics = topArtists.map(artist => {
+        return artist.image[2]['#text']
+    })
+
     const formattedArtists = listArtists.join(' | ')
     const formattedTags = 'tags: ' + tagsList.join(', ')
+    const listPics = artistsPics.join(',')
+
     const statusPost = emoji.get('musical_keyboard') + emoji.get('notes') + emoji.get('man_dancing') + 
-                        '\n' + formattedArtists + '\n' + formattedTags
+                        '\n' + formattedArtists + '\n' + formattedTags + '\n' + listPics
 
     return statusPost
 }
@@ -34,8 +42,8 @@ const main = async() => {
         twitter.post(process.env.TWITTER_API_ROOT, {status: data}, (error, tweet, response) => {
             if (error) throw error;
             console.log(tweet);
-            console.log('tweet created at: ', response.created_at);
         })
+        //console.log('data', data)
     })
 }
 
@@ -50,4 +58,8 @@ schedule.scheduleJob(rule, () => {
     main()
 })*/
 
-main()
+app.get('/', function(req, res) {
+    res.send(main())
+})
+
+//main()
