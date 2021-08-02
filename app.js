@@ -3,7 +3,7 @@ const emoji = require('node-emoji')
 const T = require('twitter')
 //const schedule = require('node-schedule')
 const express = require('express')
-//const app = express()
+const app = express()
 
 const getWeeklyTopArtists = require.main.require('./getWeeklyTopArtists.js')
 const getTags = require.main.require('./getTags.js')
