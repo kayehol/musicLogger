@@ -47,6 +47,10 @@ const main = async() => {
     })
 }
 
+const greetings = () => {
+    console.log('okay app no ar')
+}
+
 // const rule = new schedule.RecurrenceRule()
     
 // rule.dayOfWeek = 0
@@ -60,8 +64,8 @@ const main = async() => {
 
 app.get('/postar', function(req, res) {
     main()
-    // res.send(result)
+    res.send(200, "TWEET POSTADO")
 })
 
 
-//main()
+greetings()
