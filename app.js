@@ -1,9 +1,8 @@
 require('dotenv').config()
 const emoji = require('node-emoji')
 const T = require('twitter')
-//const schedule = require('node-schedule')
-const express = require('express')
-const app = express()
+//const express = require('express')
+//const app = express()
 
 const getWeeklyTopArtists = require.main.require('./getWeeklyTopArtists.js')
 const getTags = require.main.require('./getTags.js')
@@ -37,7 +36,7 @@ const formattedPost = async() => {
     return statusPost
 }
 
-const main = async() => {
+exports.main = async() => {
     formattedPost().then(data => {
         // twitter.post(process.env.TWITTER_API_ROOT, {status: data}, (error, tweet, response) => {
         //     if (error) throw error;
@@ -47,25 +46,7 @@ const main = async() => {
     })
 }
 
-const greetings = () => {
-    console.log('okay app no ar')
-}
-
-// const rule = new schedule.RecurrenceRule()
-    
-// rule.dayOfWeek = 0
-// rule.hour = 12
-// rule.minute = 0
-// rule.tz = 'America/Bahia'
-
-// schedule.scheduleJob(rule, () => {
+// app.get('/postar', function(req, res) {
 //     main()
-// }
-
-app.get('/postar', function(req, res) {
-    main()
-    res.send(200, "TWEET POSTADO")
-})
-
-
-greetings()
+//     res.send(200, "TWEET POSTADO")
+// })
