@@ -38,11 +38,11 @@ const formattedPost = async() => {
 
 exports.main = async() => {
     formattedPost().then(data => {
-        // twitter.post(process.env.TWITTER_API_ROOT, {status: data}, (error, tweet, response) => {
-        //     if (error) throw error;
-        //     console.log(tweet);
-        // })
-        console.log('data', data)
+        twitter.post(process.env.TWITTER_API_ROOT, {status: data}, (error, tweet, response) => {
+            if (error) throw error;
+            console.log(tweet);
+        })
+        //console.log('data', data)
     })
 }
 
