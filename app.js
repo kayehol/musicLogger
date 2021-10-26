@@ -1,6 +1,6 @@
 require('dotenv').config()
 const T = require('twitter')
-const getFormattedPost = require.main.require('./getFormattedPost.js')
+const getFormattedPost = require('./getFormattedPost.js')
 //const getMediaIds = require.main.require('./getMediaIds.js')
 
 const twitter = new T({
@@ -15,14 +15,16 @@ const twitter = new T({
 const main = async() => {
     getFormattedPost().then(data => {
         //   twitter.post(
-        //       process.env.TWITTER_API_ROOT, 
-        //       { status: data/*, media_ids: images*/ }, 
-        //       (error, tweet, response) => {
-        //          if (error) throw error;
-        //          console.log(tweet);
-        //   })
-       console.log('data', data/*, 'media_ids:', images*/)
+            //       process.env.TWITTER_API_ROOT, 
+            //       { status: data/*, media_ids: images*/ }, 
+            //       (error, tweet, response) => {
+                //          if (error) throw error;
+                //          console.log(tweet);
+                //   })
+       console.log('data', data/*, 'media_ids:', images*/)    
+    }).catch((err) => {
+        throw err
     })
 }
 
-export { main };
+module.exports = main

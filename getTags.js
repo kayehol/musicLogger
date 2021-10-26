@@ -1,4 +1,4 @@
-const getWeeklyTopArtists = require.main.require('./getWeeklyTopArtists.js')
+const getWeeklyTopArtists = require('./getWeeklyTopArtists.js')
 const axios = require('axios')
 
 const getTags = async () => {

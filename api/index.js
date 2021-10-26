@@ -1,5 +1,9 @@
-const { main } = require.main.require('../app.js')
+const main = require('../app.js')
 
 module.exports = (req, res) => {
-    main()    
+    try {
+        main()
+    } catch(err) {
+        console.error(err)
+    }    
 }
