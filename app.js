@@ -14,15 +14,15 @@ const twitter = new T({
 
 const main = async() => {
     getFormattedPost().then(data => {
-          twitter.post(
-              process.env.TWITTER_API_ROOT, 
-              { status: data/*, media_ids: images*/ }, 
-              (error, tweet, response) => {
-                 if (error) throw error;
-                 console.log(tweet);
-          })
-       // console.log('data', data, 'media_ids:', images)
+        //   twitter.post(
+        //       process.env.TWITTER_API_ROOT, 
+        //       { status: data/*, media_ids: images*/ }, 
+        //       (error, tweet, response) => {
+        //          if (error) throw error;
+        //          console.log(tweet);
+        //   })
+       console.log('data', data/*, 'media_ids:', images*/)
     })
 }
 
-main()
+export { main };
