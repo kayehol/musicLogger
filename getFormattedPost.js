@@ -1,14 +1,10 @@
-const getWeeklyTopArtists = require('./getWeeklyTopArtists.js')
-const getTags = require('./getTags.js')
-const getMediaIds = require('./getMediaIds.js')
 const emoji = require('node-emoji')
-
+const getTagsAndArtists = require('./getTagsAndArtists.js')
 
 const getFormattedPost = async() => {
     try {
-        const topArtists = await getWeeklyTopArtists()
-        const tagsList = await getTags()
-
+        const { tags: tagsList, artists: topArtists } = await getTagsAndArtists()
+    
         const listArtists = topArtists.map(artist => {
             return artist['@attr'].rank + '. ' + artist.name
         })
@@ -19,12 +15,10 @@ const getFormattedPost = async() => {
         const statusPost = emoji.get('musical_keyboard') + emoji.get('notes') + emoji.get('man_dancing') + 
                             '\n' + formattedArtists + '\n' + formattedTags + '\n'
         
-        //getMediaIds(listArtists)
-
         return statusPost
-    } catch(err) {
-        throw err
-    }    
+    } catch (err) {
+        throw new Error(err.message);
+    }
 }
 
 module.exports = getFormattedPost

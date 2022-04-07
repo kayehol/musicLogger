@@ -1,7 +1,6 @@
 require('dotenv').config()
 const T = require('twitter')
 const getFormattedPost = require('./getFormattedPost.js')
-//const getMediaIds = require.main.require('./getMediaIds.js')
 
 const twitter = new T({
     consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -10,21 +9,14 @@ const twitter = new T({
     access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 })
 
-//const images = await getMediaIds()
-
-const main = async() => {
-    getFormattedPost().then(data => {
-        //   twitter.post(
-            //       process.env.TWITTER_API_ROOT, 
-            //       { status: data/*, media_ids: images*/ }, 
-            //       (error, tweet, response) => {
-                //          if (error) throw error;
-                //          console.log(tweet);
-                //   })
-       console.log('data', data/*, 'media_ids:', images*/)    
-    }).catch((err) => {
-        throw err
-    })
+const main = async () => {
+    try {
+        const post = await getFormattedPost()
+        const result = await twitter.post(process.env.TWITTER_API_ROOT, { status: post })
+        console.log(result);
+    } catch(err) {
+        throw new Error(err.message)
+    }
 }
 
-module.exports = main
+main()
